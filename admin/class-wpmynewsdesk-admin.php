@@ -482,9 +482,6 @@ class Wpmynewsdesk_Admin
      */
     public function import_mynewsdesk()
     {
-        // Get the options.
-        $options = get_option($this->plugin_name . '-settings');
-
         // Set parameters for the API URL.
         $params = array(
             'offset'        => (int)$_POST['data']['offset'],
