@@ -178,6 +178,19 @@ class Wpmynewsdesk_Admin
             )
         );
 
+        // Set the unique key for the API.
+        add_settings_field(
+            'cpt-rewrite-slug',
+            __('Rewrite slug', 'wpmynewsdesk'),
+            array($this, 'sandbox_add_settings_field_input_text'),
+            $this->plugin_name . '-settings',
+            $this->plugin_name . '-settings-section',
+            array(
+                'label_for'   => 'cpt-rewrite-slug',
+                'description' => __('This rewrites the default "mynewsdesk_media" slug.', $this->plugin_name),
+            )
+        );
+
         // Enable pre-defined styles?
         add_settings_field(
             'enable-pre-defined-styles',
@@ -418,17 +431,23 @@ class Wpmynewsdesk_Admin
      */
     public function create_cpt()
     {
-        register_post_type('mynewsdesk_media',
-            array(
-                'labels'      => array(
-                    'name'          => __('Mynewsdesk'),
-                    'singular_name' => __('Mynewsdesk'),
-                ),
-                'public'      => true,
-                'has_archive' => true,
-                'supports'    => ['title', 'editor', 'thumbnail', 'page-attributes'],
-            )
+        $options = get_option($this->plugin_name . '-settings');
+
+        $args = array(
+            'labels'      => array(
+                'name'          => __('Mynewsdesk'),
+                'singular_name' => __('Mynewsdesk'),
+            ),
+            'rewrite' => [
+                    'slug' => isset($options['cpt-rewrite-slug']) ? $options['cpt-rewrite-slug'] : null,
+            ],
+            'public'      => true,
+            'has_archive' => true,
+            'supports'    => ['title', 'editor', 'thumbnail', 'page-attributes'],
         );
+
+        // Register the post type
+        register_post_type('mynewsdesk_media', $args);
 
         // Create tags taxonomy
         register_taxonomy('mynewsdesk_media_tag', 'mynewsdesk_media', array(
