@@ -478,7 +478,7 @@ class Wpmynewsdesk_Admin
     }
 
     /**
-     * @return mixed
+     * Initial import of media from Mynewsdesk API.
      */
     public function import_mynewsdesk()
     {
