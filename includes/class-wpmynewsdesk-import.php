@@ -140,6 +140,9 @@ class Wpmynewsdesk_Import
         // Get the API key.
         $unique_key = $options['unique-key'];
 
+        // Set the pressroom
+        $params['pressroom'] = isset($options['select-pressroom']) ? (string)$options['select-pressroom'] : 'se';
+
         // Build the URL.
         $url = "https://www.mynewsdesk.com/services/pressroom/list/" . $unique_key . "/?format=json&" . http_build_query($params);
 

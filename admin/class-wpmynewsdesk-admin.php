@@ -490,7 +490,6 @@ class Wpmynewsdesk_Admin
             'offset'        => (int)$_POST['data']['offset'],
             'limit'         => 5,
             'order'         => 'created',
-            'pressroom'     => isset($options['select-pressroom']) ? (string)$options['select-pressroom'] : 'se',
             'type_of_media' => isset($_POST['data']['type_of_media']) ? (string)$_POST['data']['type_of_media'] : 'news',
         );
 
