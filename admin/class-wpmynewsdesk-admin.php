@@ -515,7 +515,7 @@ class Wpmynewsdesk_Admin
 //        $items_created = $arr['items_count'] + $arr['offset'];
 
         // Send success message.
-        return wp_send_json_success(array(
+        wp_send_json_success(array(
             'params'  => $arr,
             'message' => sprintf(
                 __('Creating %d posts from the %s media type.', $this->plugin_name),
@@ -523,7 +523,5 @@ class Wpmynewsdesk_Admin
                 $arr['type_of_media']
             ),
         ));
-
-        die();
     }
 }
