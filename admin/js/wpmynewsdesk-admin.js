@@ -87,7 +87,7 @@ jQuery(function ($) {
                 if (total > offset && total > limit) {
                     offset = offset + limit;
                     if (total > offset) {
-                        run_import(offset, type_of_medias);
+                        run_import(offset, type_of_media);
                     }
                 }
             }
