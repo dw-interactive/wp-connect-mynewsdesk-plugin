@@ -87,7 +87,7 @@ jQuery(function ($) {
                 if (total > offset && total > limit) {
                     offset = offset + limit;
                     if (total > offset) {
-                        run_import(offset, type_of_medias);
+                        run_import(offset, type_of_media);
                     }
                 }
             }
@@ -96,9 +96,9 @@ jQuery(function ($) {
 
     $('.js-wpmnd--import-mynewsdesk').on('click', function (e) {
         // Clear the entire custom post type before importing anything.
-        wp_api_call({
-            action: 'wpmnd_clear_cpt'
-        });
+        // wp_api_call({
+        //     action: 'wpmnd_clear_cpt'
+        // });
 
         // Get the checked media types from admin settings page.
         var types = []

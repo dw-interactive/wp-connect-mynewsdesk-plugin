@@ -521,9 +521,21 @@ class Wpmynewsdesk_Admin
         }
 
         // Loop through items and import them to WP.
+        $importedIds = get_option($this->plugin_name . '-imported_ids-', []);
+
         foreach ($result->items->item as $item) {
-            if ($item !== null)
+            
+            if ($item !== null){
+                if(isset($importedIds['mynewsdesk_id_'.$item->id])){
+                    continue;
+                }
                 (new Wpmynewsdesk_Import($this->plugin_name, $this->version))->item($item);
+
+                $lastImported = ['id' => $item->id, 'url' => $item->url];
+                $importedIds['mynewsdesk_id_'.$item->id] = $lastImported;
+                update_option($this->plugin_name . '-imported_ids-', $importedIds);
+            }
+                
         }
 
         $arr = array_merge($params, array(
